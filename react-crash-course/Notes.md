@@ -1,0 +1,11 @@
+# Notes
+- One main root component
+- All components should be Uppercase and function name is Uppercase
+- Uppercase components are custom components while lowercase are build in component such as <div>,<p>,<section>
+- Props are always a single object {} 
+- In the return of the components (html) using {} is a special syntax to evaluate js expression 
+- Inline style <div style={{ color: 'red', textAlign: 'center' }}>, the style takes in an object js expression 
+- For scoped css used `.module.css` file to prevent class name conflicts, limited to only where its imported 
+  - example `import styles from './Post.module.css'` object `styles` could be replace with any word, its just a variable name
+- The component return html is a snapshot on initial load
+- By using useState, when the state changes that component function gets executed again with the new html snapshot
