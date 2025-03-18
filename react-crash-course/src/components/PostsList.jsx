@@ -1,23 +1,31 @@
 import NewPost from './NewPost'
 import Post from './Post'
 import styles from './PostsList.module.css'
+import { useState } from 'react'
+import Modal from './Modal'
 
-const posts = [
-  { id: 1, author: 'David', body: 'He is always hungry' },
-  { id: 2, author: 'Marie', body: 'She loves to read books' },
-  { id: 3, author: 'John', body: 'He is a great cook' },
-  { id: 4, author: 'Paul', body: 'He is a musician' },
-  { id: 5, author: 'Ringo', body: 'He is a drummer' },
-  { id: 6, author: 'George', body: 'He is a guitarist' },
+const initialPosts = [
+  { author: 'David', body: 'He is a writer' },
+  { author: 'Marie', body: 'She is dancer' },
 ]
 
-function PostsList() {
+function PostsList({ isPosting, onStopPosting }) {
+  const [posts, setPosts] = useState([...initialPosts])
+
+  function addPostHandler(postData) {
+    setPosts((prevPosts) => [postData, ...prevPosts])
+  }
+
   return (
     <>
-      <NewPost />
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
+          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
+        </Modal>
+      )}
       <ul className={styles.posts}>
-        {posts.map((post) => (
-          <Post key={post.id} author={post.author} body={post.body} />
+        {posts.map((post, ind) => (
+          <Post key={ind} author={post.author} body={post.body} />
         ))}
       </ul>
     </>

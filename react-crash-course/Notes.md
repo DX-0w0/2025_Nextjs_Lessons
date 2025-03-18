@@ -9,3 +9,8 @@
   - example `import styles from './Post.module.css'` object `styles` could be replace with any word, its just a variable name
 - The component return html is a snapshot on initial load
 - By using useState, when the state changes that component function gets executed again with the new html snapshot
+- Props `children` is a special prop that allow additional component to be wrapped around custom component. 
+  - example <Modal> <NewPost/> </Modal>
+- Props convention naming if props is a receiving function should start with `on` 
+  - example <MainHeader onCreate={fn}, onPost={fn} />
+- Inside a form html, any button is recognized as type='submit' as default 
