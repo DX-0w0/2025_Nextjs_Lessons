@@ -14,3 +14,6 @@
 - Props convention naming if props is a receiving function should start with `on` 
   - example <MainHeader onCreate={fn}, onPost={fn} />
 - Inside a form html, any button is recognized as type='submit' as default 
+- useEffect is used to handle side-effect, to run functions without having a direct effect on the html
+- useEffect should not return an async promise. Instead create a new async function inside the useEffect and then immediate execute it afterwards
+- useEffect has 2 parts, the function to be executed and an array of dependencies when it should be executed again 

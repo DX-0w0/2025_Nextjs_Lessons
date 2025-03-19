@@ -1,0 +1,8 @@
+{
+  "posts": [
+    { "body": "hahaha", "author": "Ted", "id": "0.5287274743913826" },
+    { "body": "Test", "author": "Att", "id": "0.40671654582658534" },
+    { "author": "David", "body": "He is a writer", "id": 1 },
+    { "author": "Marie", "body": "She is dancer", "id": 2 }
+  ]
+}

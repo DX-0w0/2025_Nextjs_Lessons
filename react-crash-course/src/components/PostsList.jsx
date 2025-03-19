@@ -1,18 +1,36 @@
 import NewPost from './NewPost'
 import Post from './Post'
 import styles from './PostsList.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Modal from './Modal'
 
-const initialPosts = [
-  { author: 'David', body: 'He is a writer' },
-  { author: 'Marie', body: 'She is dancer' },
-]
+// const initialPosts = [
+//   { author: 'David', body: 'He is a writer' },
+//   { author: 'Marie', body: 'She is dancer' },
+// ]
 
 function PostsList({ isPosting, onStopPosting }) {
-  const [posts, setPosts] = useState([...initialPosts])
+  const [posts, setPosts] = useState([])
+
+  useEffect(() => {
+    async function fetchPosts() {
+      const response = await fetch('http://localhost:8080/posts')
+      const data = await response.json()
+      setPosts(data.posts)
+    }
+
+    fetchPosts()
+  }, [])
 
   function addPostHandler(postData) {
+    fetch('http://localhost:8080/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postData),
+    })
+
     setPosts((prevPosts) => [postData, ...prevPosts])
   }
 
