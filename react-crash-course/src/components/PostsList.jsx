@@ -11,12 +11,15 @@ import Modal from './Modal'
 
 function PostsList({ isPosting, onStopPosting }) {
   const [posts, setPosts] = useState([])
+  const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
     async function fetchPosts() {
+      setIsFetching(true)
       const response = await fetch('http://localhost:8080/posts')
       const data = await response.json()
       setPosts(data.posts)
+      setIsFetching(false)
     }
 
     fetchPosts()
@@ -41,11 +44,18 @@ function PostsList({ isPosting, onStopPosting }) {
           <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
         </Modal>
       )}
-      <ul className={styles.posts}>
-        {posts.map((post, ind) => (
-          <Post key={ind} author={post.author} body={post.body} />
-        ))}
-      </ul>
+      {!isFetching && (
+        <ul className={styles.posts}>
+          {posts.map((post, ind) => (
+            <Post key={ind} author={post.author} body={post.body} />
+          ))}
+        </ul>
+      )}
+      {isFetching && (
+        <div style={{ textAlign: 'center' }}>
+          <p>Loading...</p>
+        </div>
+      )}
     </>
   )
 }
