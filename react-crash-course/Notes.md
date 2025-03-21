@@ -17,3 +17,14 @@
 - useEffect is used to handle side-effect, to run functions without having a direct effect on the html
 - useEffect should not return an async promise. Instead create a new async function inside the useEffect and then immediate execute it afterwards
 - useEffect has 2 parts, the function to be executed and an array of dependencies when it should be executed again 
+- Can create `isLoading` state inside the useEffect, set to true at the beginning and false at the end of the function
+- `Outlet` from the react-router-dom load the rest of the nested routes in the children array of objects 
+- Routes are created by the `createBrowserRouter`
+- use the `Link` when navigating between routes
+- use the `useNavigate` hook to navigate inside a function
+- In the route, there is a property call `loader` which loads all the necessary data before the element gets loaded. It can be async or sync 
+- We can access the data with the `useLoaderData` hook any components on the element that used the `loader` function. The cb has a given data object that can be used. The data object has a property of `params`
+- In the route, there is a property call `action` which is used with the `Form` component from the react-router-dom. The cb has a given data object that can be used. The data object has a property of `request`
+- Using the `Form` give input `name` so it easier to get back the input data 
+- Route `path` adding a `/` at the beginning is absolute path, without its relative path
+- Dynamic path use the `:` keyword followed by a name `:id`
