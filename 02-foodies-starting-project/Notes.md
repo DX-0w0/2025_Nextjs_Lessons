@@ -23,3 +23,9 @@ https://nextjs.org/docs
 - Server component we are allow to make it into `async` function which is not allowed on the client component 
 - The file `loading.js` is a reserved name like `page` and `layout`
 - The `layout` is used to define shared layouts for your application. It allows you to create persistent UI components like navigation bars, sidebars, or footers that remain consistent across different pages. It will consume sibling `page.js` and all `page.js` nested in subroutes
+- react `Suspense` component is used for loading or waiting for resource to be loaded, fallback property renders DOM element when data is still being fetched
+- Nuxtjs `loading.js` file does the same logic as react `Suspense` component
+- By using `Suspense` you able to control only certain portion of the component to wait until data is loaded, rather than everything on the component 
+- Use the reserved `error.js` file to handle any error, will catch error on that route or anything nested under that route, its better to limit to a define route rather than placing it at root app. Must be `use client`
+- The `notFound()` from next/navigation will show the closes `not-found.js` or `error.js`
+- When <input type='file' /> use JS `new FileReader()` to read a file stored on the computer
