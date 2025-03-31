@@ -29,3 +29,21 @@ https://nextjs.org/docs
 - Use the reserved `error.js` file to handle any error, will catch error on that route or anything nested under that route, its better to limit to a define route rather than placing it at root app. Must be `use client`
 - The `notFound()` from next/navigation will show the closes `not-found.js` or `error.js`
 - When <input type='file' /> use JS `new FileReader()` to read a file stored on the computer
+- A function that has `use server` inside, is a function that only excute on the server. Example <form action={}> we can now set the `action` to the async function 
+- Having the directive `use server` at top of file instead of inside function. All functions on the file are now server only function
+- Package `xss` prevent cross script attack when using `dangerouslySetInnerHTML`
+- Pacage `fs` file system to read and write to local computer
+- In sql can insert value with ? or @key, values and keys must be in the same order     
+ ```
+VALUES (?, ?, ?, ?, ?, ?, ?, ? )
+or 
+VALUES (
+      @slug,
+      @title,
+      @image,
+      @summary,
+      @instructions,
+      @creator,
+      @creator_email
+    )
+```
