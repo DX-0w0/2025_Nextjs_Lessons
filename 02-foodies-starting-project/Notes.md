@@ -47,3 +47,10 @@ VALUES (
       @creator_email
     )
 ```
+- The hook `useFormStatus` from 'react-dom' can only be used with <form ></form>
+- Its a good practice to validate on `server side` for valid data
+- The hook `useFormState` from 'react-dom' handles the form response, takes two arg, the actionFn and initalState
+- Running `npm run build` give you a production build of the app
+- Running `npm run dev` starts the development server `npm start` starts the production server
+- When doing a production build, next does caching very aggressively for pre-generated pages, it's does not refetch when data changes, to resolve import `revalidatePath()` from 'next/cache'. Takes in 2 args, 1st is the path, 2nd is either 'page' just for that page or 'layout' for that page and nested pages. Using revalidate will throw away old cache for those pages. To revalidate the whole app `revalidatePath('/', 'layout')`
+- For metadata on page or layout next look for the `metadata` varaiable, on dynamic page it looks for the function `generateMetadata()`  
