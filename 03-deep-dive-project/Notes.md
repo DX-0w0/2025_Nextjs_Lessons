@@ -18,7 +18,9 @@
   `https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes`
 - Best to use `intercepting route` with `parallel route`, creating overlay modals
 - Intercepting routes allows you to load a route from another part of your application within the current layout. This routing paradigm can be useful when you want to display the content of a route without the user switching to a different context.
-
-
+- User navagate programmatically `useRouter` hook from next/navigation
+- Grouping routes by using `route groups` to achieve create a folder with `(anyname)`. When seting up route groups pages,layout,error,not-found CANNOT be on the same level as those route groups
+- `Route handler` resevered filename `route.js` has methods name of GET, POST, PATCH, PUT, DELETE, has a given request argument. Useful in handling communication with 3th party and external api
+- Another useful route handler, reserved filename `middleware.js` should be at root project folder, function named `middleware` has a given request argument, matcher and config `https://nextjs.org/docs/app/building-your-application/routing/middleware`
 
   
