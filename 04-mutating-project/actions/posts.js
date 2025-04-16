@@ -1,6 +1,8 @@
 'use server'
 
-import { storePost } from '@/lib/posts'
+import { uploadImage } from '@/lib/cloundinary'
+import { storePost, updatePostLikeStatus } from '@/lib/posts'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 //When passing into useFormState as the action the createPost function will receive 2 arg instead of one, prevState then the formData.
@@ -26,12 +28,26 @@ export async function createPost(prevState, formData) {
     return { errors }
   }
 
+  let imageUrl
+
+  try {
+    imageUrl = await uploadImage(image)
+  } catch (error) {
+    throw new Error('Image uploaded failed, post was not created!!')
+  }
+
   await storePost({
-    imageUrl: '',
+    imageUrl: imageUrl,
     title,
     content,
     userId: 1,
   })
 
+  revalidatePath('/', 'layout')
   redirect('/feed')
+}
+
+export async function togglePostLikeStatus(postId) {
+  await updatePostLikeStatus(postId, 2)
+  revalidatePath('/', 'layout')
 }
