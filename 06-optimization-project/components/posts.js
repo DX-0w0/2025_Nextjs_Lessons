@@ -1,18 +1,38 @@
-"use client";
+'use client'
 
-import { useOptimistic } from 'react';
+import { useOptimistic } from 'react'
 
-import { formatDate } from '@/lib/format';
-import LikeButton from './like-icon';
-import { togglePostLikeStatus } from '@/actions/posts';
+import { formatDate } from '@/lib/format'
+import LikeButton from './like-icon'
+import { togglePostLikeStatus } from '@/actions/posts'
+import Image from 'next/image'
+
+function imageLoader(config) {
+  // console.log(config)
+  // 'https://res.cloudinary.com/dunw1hi4a/image/upload/v1744986796/nextjs-course-mutations/jtbfqghmavirfn1dvkvp.png'
+  const urlStart = config.src.split('upload/')[0] + 'upload'
+  const urlEnd = config.src.split('upload/')[1]
+  const transformation = `w_200,q_${config.quality}`
+  const src = `${urlStart}/${transformation}/${urlEnd}`
+  // console.log(src)
+  return src
+}
 
 function Post({ post, action }) {
   return (
-    <article className="post">
-      <div className="post-image">
-        <img src={post.image} alt={post.title} />
+    <article className='post'>
+      <div className='post-image'>
+        <Image
+          src={post.image}
+          loader={imageLoader}
+          // fill
+          width={200}
+          height={120}
+          alt={post.title}
+          quality={50}
+        />
       </div>
-      <div className="post-content">
+      <div className='post-content'>
         <header>
           <div>
             <h2>{post.title}</h2>
@@ -35,41 +55,46 @@ function Post({ post, action }) {
         <p>{post.content}</p>
       </div>
     </article>
-  );
+  )
 }
 
 export default function Posts({ posts }) {
-  const [optimisticPosts, updateOptimisticPosts] = useOptimistic(posts, (prevPosts, updatedPostId) => {
-    const updatedPostIndex = prevPosts.findIndex(post => post.id === updatedPostId);
+  const [optimisticPosts, updateOptimisticPosts] = useOptimistic(
+    posts,
+    (prevPosts, updatedPostId) => {
+      const updatedPostIndex = prevPosts.findIndex(
+        (post) => post.id === updatedPostId
+      )
 
-    if (updatedPostIndex === -1) {
-      return prevPosts;
+      if (updatedPostIndex === -1) {
+        return prevPosts
+      }
+
+      const updatedPost = { ...prevPosts[updatedPostIndex] }
+      updatedPost.likes = updatedPost.likes + (updatedPost.isLiked ? -1 : 1)
+      updatedPost.isLiked = !updatedPost.isLiked
+      const newPosts = [...prevPosts]
+      newPosts[updatedPostIndex] = updatedPost
+      return newPosts
     }
-
-    const updatedPost = { ...prevPosts[updatedPostIndex] };
-    updatedPost.likes = updatedPost.likes + (updatedPost.isLiked ? -1 : 1);
-    updatedPost.isLiked = !updatedPost.isLiked;
-    const newPosts = [...prevPosts];
-    newPosts[updatedPostIndex] = updatedPost;
-    return newPosts;
-  })
+  )
 
   if (!optimisticPosts || optimisticPosts.length === 0) {
-    return <p>There are no posts yet. Maybe start sharing some?</p>;
+    return <p>There are no posts yet. Maybe start sharing some?</p>
   }
 
   async function updatePost(postId) {
-    updateOptimisticPosts(postId);
-    await togglePostLikeStatus(postId);
+    updateOptimisticPosts(postId)
+    await togglePostLikeStatus(postId)
   }
 
   return (
-    <ul className="posts">
+    <ul className='posts'>
       {optimisticPosts.map((post) => (
         <li key={post.id}>
           <Post post={post} action={updatePost} />
         </li>
       ))}
     </ul>
-  );
+  )
 }
