@@ -53,7 +53,6 @@ export async function verifyAuth() {
   try {
     if (result.session && result.session.fresh) {
       const sessionCookie = lucia.createBlankSessionCookie(result.session.id)
-
       cookies().set(
         sessionCookie.name,
         sessionCookie.value,
@@ -62,8 +61,7 @@ export async function verifyAuth() {
     }
 
     if (!result.session) {
-      const session = lucia.createBlankSessionCookie()
-
+      const sessionCookie = lucia.createBlankSessionCookie()
       cookies().set(
         sessionCookie.name,
         sessionCookie.value,
@@ -73,4 +71,23 @@ export async function verifyAuth() {
   } catch (error) {}
 
   return result
+}
+
+export async function destroySession() {
+  const { session } = await verifyAuth()
+
+  if (!session) {
+    return {
+      error: 'Unauthorized',
+    }
+  }
+
+  await lucia.invalidateSession(session.id)
+
+  const sessionCookie = lucia.createBlankSessionCookie()
+  cookies().set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes
+  )
 }
