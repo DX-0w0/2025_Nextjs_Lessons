@@ -1,4 +1,4 @@
-# Notes
+# Notes - 05 cache
 
 - request memoization
   - stores data withe same configuration

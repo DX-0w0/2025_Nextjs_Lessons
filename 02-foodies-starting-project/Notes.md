@@ -1,4 +1,4 @@
-# Notes
+# Notes - 02 foodie
 
 ```
 https://nextjs.org/docs

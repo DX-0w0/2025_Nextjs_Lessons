@@ -1,4 +1,4 @@
-# Notes
+# Notes - 01 starting
 
 - Inside the app folder, the `page.js|jsx` and `layout.js|jsx` are reserved words they use react jsx code, either `.js` or `.jsx` are both acceptable. They are `server component` and NOT CLIENT component. If you console.log it will log onto the terminal rather than the browser client.
 - To add a new route create a new folder and add a `page.js` file

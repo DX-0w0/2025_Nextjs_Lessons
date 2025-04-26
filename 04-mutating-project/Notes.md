@@ -1,4 +1,4 @@
-# Notes
+# Notes - 04 mutating
 - Managing data 2 options
   - standalone backend (extra server)
   - integrated nextjs app (reduced complexity, single server)

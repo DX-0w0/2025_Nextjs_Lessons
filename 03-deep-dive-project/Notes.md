@@ -1,4 +1,4 @@
-# 03 - Deep Dive
+# Notes - 03 Deep Dive
 
 - Inside a route folder, `parallel route`, create a new folder with `@AnyName` create as many sibling or parallel route
 - Normally the layout page will have a `children` prop, but with parallel route, the layout page will have a prop for each of the parallel folder name `@`
