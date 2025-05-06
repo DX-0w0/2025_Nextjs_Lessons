@@ -10,3 +10,6 @@
   - 2. server side rendering
 - process.cwd() is the current working directory (the root)
 - SSG (static side generation)
+- ISG (Incremental Static Generation)
+  - re-generate on every request at every x seconds (can only be seen in production build)
+  - add a `revalidate` in the return on the `getStaticProps` function

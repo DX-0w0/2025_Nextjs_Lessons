@@ -16,6 +16,7 @@ function HomePage(props) {
 // This function is special named function. Always return a props key. This props will be send to above
 // Server-side
 export async function getStaticProps() {
+  console.log('REGENERATE...')
   const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json')
   const jsonData = await fs.readFile(filePath)
   const data = JSON.parse(jsonData)
@@ -24,6 +25,7 @@ export async function getStaticProps() {
     props: {
       products: data.products,
     },
+    revalidate: 10,
   }
 }
 
