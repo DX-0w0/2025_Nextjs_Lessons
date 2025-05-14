@@ -6,13 +6,26 @@ function HomePage(props) {
   const { products } = props
 
   return (
-    <ul>
-      {products.map((product) => (
-        <li key={product.id}>
-          <Link href={`/${product.id}`}>{product.title}</Link>
+    <>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            <Link href={`products/${product.id}`}>{product.title}</Link>
+          </li>
+        ))}
+      </ul>
+      <ul>
+        <li>
+          <Link href='/user-profile'>User</Link>
         </li>
-      ))}
-    </ul>
+        <li>
+          <Link href='/last-sales'>Sales</Link>
+        </li>
+        <li>
+          <Link href='/last-sales2'>Sales2</Link>
+        </li>
+      </ul>
+    </>
   )
 }
 
@@ -27,7 +40,7 @@ export async function getStaticProps(context) {
   if (!data) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/no-data',
       },
     }
   }
